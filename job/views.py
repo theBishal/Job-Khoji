@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from datetime import date
+from django.contrib import messages
 
 # Create your views here.
 
@@ -19,10 +20,13 @@ def admin_login(request):
        try:
           if user.is_staff:
              login(request,user)
+             messages.success(request, "Login Successful!")
              error="no"
           else:
+             messages.warning(request, "Invalid credentials, please try again.")
              error="yes"
        except:
+          messages.warning(request, "Invalid credentials, please try again.")
           error="yes" 
     d ={'error':error}      
 
@@ -40,13 +44,17 @@ def user_login(request):
           user1 = StudentUser.objects.get(user=user)
           if user1.type == "student":
              login(request,user)
+             messages.success(request, "Login Successful!")
              error="no"
           else:
+             messages.warning(request, "Invalid credentials, please try again.")
              error="yes"
        except:
+          messages.warning(request, "Invalid credentials, please try again.")
           error="yes"  
 
     else:
+       messages.warning(request, "Invalid credentials, please try again.") 
        error="yes"    
    d ={'error':error}        
    return render(request,'user_login.html',d)
@@ -62,13 +70,17 @@ def recruiter_login(request):
           user1 = Recruiter.objects.get(user=user)
           if user1.type == "recruiter" and user1.status == "Accept":
              login(request,user)
+             messages.success(request, "Login Successful!")
              error= "no"
           else:
+             messages.warning(request, "Your Login status is pending")    
              error="not"
        except:
+          messages.warning(request, "Invalid credentials, please try again.")
           error="yes"  
 
     else:
+       messages.warning(request, "Invalid credentials, please try again.")
        error="yes"    
  d ={'error':error}       
  return render(request,'recruiter_login.html',d)
@@ -87,8 +99,10 @@ def recruiter_signup(request):
        try:
         user = User.objects.create_user(first_name=f,last_name=l, username=e, password=p)
         Recruiter.objects.create(user=user, mobile=con, image=i, gender=gen,company=company, type="recruiter",status="pending")
+        messages.success(request, "Registration Successful!")
         error="no"
        except:
+          messages.warning(request, "Registration Failed, please try again.")  # error message for duplicate username or password.  # this should be handled in your project based on your requirements.  # here it is kept as is for simplicity.  # you may want to display a more meaningful error message.  # Example: "Username already exists. Please choose a different one." or "Password must be at least 8 characters long." etc.   # this line of code will raise an
           error="yes"
     d = {'error':error}
     return render(request,'recruiter_signup.html',d)
@@ -177,6 +191,7 @@ def recruiter_home(request):
 
 def Logout(request):
    logout(request)
+   messages.warning(request, "Logged Out Successfully!")
    return redirect('index')
 
 def user_signup(request):

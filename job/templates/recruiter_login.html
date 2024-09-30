@@ -99,15 +99,7 @@
 
 {% if error == "no" %}
 <script>
-  alert("LogIn Successful");
   window.location.href = "{% url 'recruiter_home' %}";
 </script>
-{% endif %} {% if error == "yes" %}
-<script>
-  alert("Invalid credentials, please try again.");
-</script>
-{% endif %} {% if error == "not" %}
-<script>
-  alert("Your Login status is pending");
-</script>
+
 {% endif %} {% include 'footer.html' %}{% endblock %}

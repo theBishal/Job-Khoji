@@ -102,13 +102,8 @@ section{
 
   {% if error == "no" %}
   <script>
-    alert("LogIn Successful");
     window.location.href = "{% url 'user_home' %}";
   </script>
-  {% endif %} {% if error == "yes" %}
-  <script>
-    alert("Invalid credentials, please try again.");
-  </script>
+  {% endif %} 
   
-</section>
-{% endif %}{% include 'footer.html' %} {% endblock %}
+{% include 'footer.html' %} {% endblock %}

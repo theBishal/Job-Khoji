@@ -77,11 +77,6 @@
 
 {% if error == "no" %}
 <script>
-  alert("LogIn Successful");
   window.location.href = "{% url 'admin_home' %}";
 </script>
-{% endif %} {% if error == "yes" %}
-<script>
-  alert("Invalid credentials, please try again.");
-</script>
-{% endif %} {% include 'footer.html' %} {% endblock %}
+{% endif %}  {% include 'footer.html' %} {% endblock %}

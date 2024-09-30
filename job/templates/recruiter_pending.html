@@ -1,0 +1,133 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'admin_navigation.html' %}
+
+<!-- Marquee section -->
+<marquee style="font-family: 'Monotype Corsiva'; font-size: 25px; color: white; background-color: black; font-weight: bold; margin-top: 1%;">
+    {% if view == 'pending' %}
+        View Recruiter - Pending
+    {% else %}
+        View All Recruiters
+    {% endif %}
+</marquee>
+
+<hr>
+
+<!-- Table Styles -->
+<style>
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .table th {
+        background-color: yellow; /* Bright blue background for the header */
+        color: black;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table tbody tr {
+        background-color: #f9f9f9;
+        transition: background-color 0.3s; /* Hover effect */
+    }
+
+    .table tbody tr:hover {
+        background-color: #e0f7fa;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f1f1f1;
+    }
+
+    .table img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%; /* Circular images */
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<!-- Recruiter Table -->
+<table class="table table-hover container" id="example">
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>Full Name</th>
+            <th>Email ID</th>
+            <th>Contacts</th>
+            <th>Gender</th>
+            <th>Company</th>
+            <th>Image</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.user.first_name }} {{ i.user.last_name }}</td>
+            <td>{{ i.user.username }}</td>
+            <td>{{ i.mobile }}</td>
+            <td>{{ i.gender }}</td>
+            <td>{{ i.company }}</td>
+            <td><img src="{{ i.image }}" alt="Profile Image"></td>
+            <td>{{ i.status }}</td>
+            <td>
+                <div class="btn-container">
+                    <a href="{% url 'change_status' i.id %}" class="btn btn-success">Change Status</a>
+                    <a href="{% url 'delete_recruiter' i.user.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

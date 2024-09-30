@@ -1,0 +1,116 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'recruiter_navigation.html' %}
+<style>
+
+    .signup-content{
+        display: flex;
+        align-items: center;
+        background-size: cover;
+        overflow: hidden;
+        height: 90vh;
+        width: 100%;
+        font-size: 20px;
+        justify-content: space-between;
+        flex-direction: flex-start;
+        background-color:#b2a9ec;
+
+    }
+    .signup-content form{
+        width: 90vh;
+        padding: 25px 30px  ;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #e7e7e7;
+        border-radius: 20px;
+        background-color:#fff;
+    }
+    form div {
+        margin-bottom: 8px;
+    }
+    .signup_image img{
+        text-align: left;
+        opacity: 1;
+        object-fit: cover;
+        height: 90vh;
+    }
+
+</style>
+
+<section class="signup-content">
+<div class="signup_image">
+    <img src="{% static 'images/join.jpg' %}" alt="Job Image" />
+  </div>
+<div >
+<form class="container mt-3" onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label style="font-weight: bold;">Job Title</label>
+        <input type="text" class="form-control" name="jobtitle" placeholder="Enter Job Title" required>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Start Date</label>
+            <input type="date" class="form-control" name="startdate" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">End Date</label>
+            <input type="date" class="form-control" name="enddate" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Salary (Per Month)</label>
+            <input type="text" class="form-control" name="salary" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Company Logo</label>
+            <input type="file" class="form-control" name="logo" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Experience (In Years)</label>
+            <input type="text" class="form-control" name="experience" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Company Location</label>
+            <input type="text" class="form-control" name="location" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label style="font-weight: bold;">Skills</label>
+        <input type="text" class="form-control" name="skills" placeholder="Skills Required" required>
+    </div>
+
+    <div class="form-group">
+        <label style="font-weight: bold;">Description</label>
+        <textarea class="form-control" name="description" rows="4" required></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-primary my-3" style="width: 100%; height: 45px; font-size: 18px;" value="Add Job">
+</form>
+</section>
+
+{% if error == "no" %}
+<script>
+    alert("Job detail has been added.");
+    window.location.href = ("{% url 'job_list' %}");
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong");
+</script>
+{% endif %}
+
+{% endblock %}

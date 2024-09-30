@@ -1,0 +1,108 @@
+{% load static %} {% block body %} {% include 'admin_navigation.html' %}
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.6.3/css/all.min.css"
+/>
+
+<style>
+  .hero {
+    background-color: #dfeff8;
+    height: 89vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .banner {
+    height: 90vh;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    flex-direction: flex-start;
+    justify-content: space-between;
+  }
+  .banner .banner_img {
+    text-align: left;
+    opacity: 0.8;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    height: 75vh;
+  }
+  #info_content{
+    display: flex;
+    flex-direction: flex-end;
+    width: 100%;
+    float: right;
+
+  }
+
+  .mydiv {
+    background-color: white; /* White background for cards */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside the cards */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+  }
+
+  .mydiv:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Shadow on hover */
+    transform: translateY(-10px); /* Lift effect on hover */
+  }
+
+  .text-center {
+    color: #007bff; /* Blue color for headings */
+  }
+
+  hr {
+    border: 1px solid #007bff; /* Blue horizontal line */
+  }
+  #admin_heading h1{
+    color: #000; /* Blue color for heading */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5); /*
+    
+  }
+</style>
+<main class="hero">
+  <div class="banner text-center">
+    <div class="banner_img">
+      <img src="{% static 'images/hero.jpg' %}" alt="Job Image" />
+    </div>
+  </div>
+
+  <div class="container-fluid mt-3"  >
+    <div class="row">
+      <div class="col-sm-12" id="admin_heading">
+        <h1 class="text-center">Welcome to Job Khoji Admin Panel</h1>
+      </div>
+    </div>
+    <div class="col mt-5" id="info_content">
+      <div class="col-sm-6 mb-4">
+        <div class="mydiv">
+          <h4 class="text-center">
+            <i class="fa fa-user"></i> Total Recruiters
+          </h4>
+          <p class="text-center font-weight-bold" style="font-size: 36px">
+            {{ rcount }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 mb-4">
+        <div class="mydiv">
+          <h4 class="text-center"><i class="fa fa-users"></i> Total Users</h4>
+          <p class="text-center font-weight-bold" style="font-size: 36px">
+            {{ scount }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</main>

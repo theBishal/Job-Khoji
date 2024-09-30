@@ -1,0 +1,169 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'user_navigation.html' %}
+
+<style>
+    /* Styling for the Job Details Marquee */
+    .job-details-marquee {
+        font-family: 'Monotype Corsiva', cursive;
+        font-size: 25px;
+        color: white;
+        background-color: black;
+        font-weight: bold;
+        margin-top: 1%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    /* Main container for job details */
+    .custom-container {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        display: flex;
+        flex-direction: flex-end;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Job Title Styling */
+    .job-title {
+        font-size: 32px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    /* Job Meta Information */
+    .job-meta {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .job-meta a {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    .job-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* Button Styling */
+    .custom-btn {
+        width: 220px;
+        height: 50px;
+        font-size: 18px;
+        border-radius: 8px;
+    }
+
+    /* Job Overview Sections */
+    .job-overview h4 {
+        margin-top: 30px;
+        color: #007bff;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .job-overview p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Image styling */
+    .job-image {
+        height: 40vh;
+        width: auto;
+        max-width: 500px;
+        border-radius: 10%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Additional styling */
+    hr {
+        border-top: 2px solid #007bff;
+        margin-top: 20px;
+    }
+    #job-details-content h1{
+        font-size: 40px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    #job-details-content p{
+        font-size: 18px;
+        color: #555;
+        line-height: 1.7;
+        font-weight:bold;
+    }
+
+</style>
+
+<marquee class="job-details-marquee">
+    Job Details
+</marquee>
+
+<hr>
+
+<div class="container shadow-lg py-4 mb-4 custom-container" id="job-details-content">
+    <div class="row align-items-center">
+            <img src="{{ job.image.url }}" class="img-fluid job-image" alt="{{ job.title }}">
+    </div>
+    <div class="mt-4 job-overview">
+        <h4>Overview</h4>
+        <p>{{ job.description }}</p>
+        
+        <h4>Required Experience</h4>
+        <p>{{ job.experience }} Yrs</p>
+        
+        <h4>Skills Required</h4>
+        <p>{{ job.skills }}</p>
+        
+        <h4>Start Date for Applying</h4>
+        <p>{{ job.start_date }}</p>
+        
+        <h4>Last Date for Applying</h4>
+        <p>{{ job.end_date }}</p>
+    </div>
+
+
+    <div class="row">
+        <!-- Job Image -->
+        
+        
+        <!-- Job Information -->
+        <div class="col-md-8 mx-5" >
+            <h1 class="job-title">{{ job.title }}</h1   >
+            <p>
+               <span>Company: {{ job.recruiter.company }}</span>
+            </p>
+            <p class="job-meta">
+                <a href="#"><i class="fa fa-map-marker"></i> {{ job.location }}</a>
+            </p>
+            <p class="job-meta">
+                <a href="#"><i class="fa fa-calendar"></i> {{ job.creationdate }}</a>
+            </p>
+            <h3>
+                    <i class="fa fa-money mr-2"></i>{{ job.salary }}
+            </h3>
+            <div class="my-4 ">
+                <a href="{% url 'applyforjob' job.id %}" class="btn btn-danger btn-lg custom-btn">Apply for this job</a>
+            </div>
+            <div class="my-4 ">
+                <a href="{% url 'user_latestjobs' %}" class="btn btn-primary btn-lg custom-btn">View all jobs</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Overview -->
+    
+</div>
+
+{% endblock %}

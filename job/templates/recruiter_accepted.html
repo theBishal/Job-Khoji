@@ -1,0 +1,107 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'admin_navigation.html' %}
+
+<marquee style="font-family: 'Monotype Corsiva'; font-size: 25px; color: white; background-color: black; font-weight: bold; margin-top: 1%;">
+    View Recruiter - Accepted
+</marquee>
+    
+<hr>
+
+<style>
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden; /* To round the borders */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .table th {
+        background-color: #4CAF50; /* Green background for the header */
+        color: white; /* White text color for the header */
+        font-weight: bold;
+        text-transform: uppercase; /* Uppercase text for headers */
+    }
+
+    .table tbody tr {
+        background-color: #f9f9f9; /* Light background for table rows */
+        transition: background-color 0.3s; /* Smooth transition for hover effect */
+    }
+
+    .table tbody tr:hover {
+        background-color: #e0f7fa; /* Light blue on hover */
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f1f1f1; /* Slightly darker for even rows */
+    }
+
+    .table img {
+        width: 80px; /* Adjusted width for images */
+        height: 80px; /* Adjusted height for images */
+        border-radius: 50%; /* Circular image */
+    }
+
+    .btn-success {
+        background-color: #28a745; /* Green button */
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-success:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+</style>
+
+<table class="table table-hover container" id="example">
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>Full Name</th>
+            <th>Email ID</th>
+            <th>Contacts</th>
+            <th>Gender</th>
+            <th>Company</th>
+            <th>Image</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.user.first_name }} {{ i.user.last_name }}</td>
+            <td>{{ i.user.username }}</td>
+            <td>{{ i.mobile }}</td>
+            <td>{{ i.gender }}</td>
+            <td>{{ i.company }}</td>
+            <td>
+                <img src="{{ i.image }}" alt="Profile Image">
+            </td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url 'change_status' i.id %}" class="btn btn-success">Change Status</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% load static %} {% block body %} {% include 'navigation.html' %}
+<style>
+  #example {
+    width: 100%;
+    font-size: 18px;
+    margin: 70px auto 22vh auto;
+  }
+
+  #example th,
+  td {
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+  }
+  #example th {
+    background-color: blue; /* Bright blue header */
+    color: white;
+  }
+  .latest-job-marquee {
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    font-weight: bold;
+    margin-top: 1%;
+    padding: 4px; /* Add padding for better visibility */
+  }
+
+  .table {
+    margin-top: 20px;
+    background-color: #fff; /* White background for better visibility */
+  }
+
+  .table-primary {
+    background-color: #007bff; /* Bright blue header */
+    color: white;
+  }
+
+  .table-light {
+    background-color: #f8f9fa; /* Light gray for the body */
+  }
+
+  .table tbody tr:hover {
+    background-color: #ffeeba; /* Light yellow on hover for visibility */
+  }
+
+  .btn {
+    margin-right: 5px;
+  }
+</style>
+<marquee class="latest-job-marquee"> Latest Job List </marquee>
+
+<hr />
+
+<table class="table table-hover table-bordered" id="example">
+  <thead>
+    <tr class="table-primary">
+      <th>S.No.</th>
+      <th>Company Name</th>
+      <th>Job Title</th>
+      <th>Location</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in job %}
+    <tr class="table-light">
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.recruiter.company }}</td>
+      <td>{{ i.title }}</td>
+      <td>{{ i.location }}</td>
+      <td>{{ i.start_date }}</td>
+      <td>{{ i.end_date }}</td>
+      <td>
+        <a href="{% url 'user_login' %}" class="btn btn-success"
+          >Log In To Apply</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% include 'footer.html' %} {% endblock %}

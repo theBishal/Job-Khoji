@@ -1,0 +1,87 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'user_navigation.html' %}
+
+<style>
+    body {
+        background-color: #f4f4f4; /* Light background for better contrast */
+    }
+    .marquee {
+        font-family: 'Monotype Corsiva';
+        font-size: 25px;
+        color: darkcyan;
+        background-color: black;
+        font-weight: bold;
+        margin-top: 1%;
+        padding: 10px; /* Add padding for better visibility */
+    }
+    .container {
+        background-color: white; /* White background for the form container */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        padding: 20px; /* Inner padding for better spacing */
+        margin-top: 20px; /* Top margin for spacing */
+    }
+    .font-weight-bold {
+        font-size: 18px; /* Increase font size for labels */
+        color: #333; /* Darker color for text */
+    }
+    .form-control {
+        border-radius: 5px; /* Rounded input fields */
+        border: 1px solid #ccc; /* Border color */
+    }
+    .form-control:focus {
+        border-color: #007bff; /* Bootstrap primary color on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Focus shadow */
+    }
+    .btn-danger {
+        background-color: #dc3545; /* Bootstrap danger color */
+        border: none; /* Remove border */
+        padding: 10px 20px; /* Increase padding */
+        font-size: 16px; /* Font size for button */
+        border-radius: 5px; /* Rounded button */
+        transition: background-color 0.3s; /* Smooth transition for hover */
+    }
+    .btn-danger:hover {
+        background-color: #c82333; /* Darker red on hover */
+    }
+</style>
+
+<marquee class="marquee">Apply for Job</marquee>
+<hr>
+
+<div class="container shadow-lg py-2 mb-2">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label class="font-weight-bold">Upload Resume</label>
+            <input type="file" class="form-control" name="resume" required>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-danger mt-3">
+    </form>
+</div>
+
+{% if error == "close" %}
+<script>
+    alert("Application Line is closed. Last date is over.");
+    window.location.href = ("{% url 'user_latestjobs' %}");
+</script>
+{% endif %}
+
+{% if error == "notopen" %}
+<script>
+    alert("Application is not open.");
+    window.location.href = ("{% url 'user_latestjobs' %}");
+</script>
+{% endif %}
+
+{% if error == "done" %}
+<script>
+    alert("Job Application submitted successfully.");
+    window.location.href = ("{% url 'user_latestjobs' %}");
+</script>
+{% endif %}
+
+{% endblock %}

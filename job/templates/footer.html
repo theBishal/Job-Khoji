@@ -1,0 +1,87 @@
+{% load static %}
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<style>
+    /* Style the footer */
+    footer {
+      background-color: #1c1c1c;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+
+
+    }
+    
+    /* Change the color of the footer text on hover */
+    footer a:hover {
+      color: #f1c40f;
+    }
+  }
+</style>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mt-3">
+        <h3 class="text-white">Contact Information</h3>
+        <p style="color: #f1c40f; font-size: 18px">
+          <i class="fa fa-map-marker text-danger"></i> Birauta Pokhara, Nepal
+        </p>
+        <p style="color: #f1c40f; font-size: 18px">
+          <i class="fa fa-envelope text-danger"></i> sauggupoudel10@gmail.com
+        </p>
+        <p style="color: #f1c40f; font-size: 18px">
+          <i class="fa fa-mobile text-danger"></i> 9848259239
+        </p>
+        <p style="color: #f1c40f; font-size: 18px">
+          <i class="fa fa-globe text-danger"></i> www.instagram.com
+        </p>
+      </div>
+
+      <div class="col-md-4 mt-3">
+        <h3 class="text-white">Online Placement</h3>
+        <p style="color: #f1c40f; font-size: 18px">
+          An online job portal connects job seekers with employers by offering a
+          platform to browse and apply for job listings. It streamlines the
+          recruitment process by providing tools for job searches, resume
+          uploads, and automated job-matching features. Employers can post
+          vacancies, screen candidates, and manage applications, making the
+          hiring process efficient and accessible.
+        </p>
+      </div>
+
+      <div class="col-md-4 mt-3">
+        <h3 class="text-white">NewsLetter</h3>
+        <p style="color: #f1c40f; font-size: 18px">
+          If you want any extra information then send us your email ID.
+        </p>
+        <form method="post" >
+          {% csrf_token %}
+          <div class="row w-100">
+          <input
+            type="email"
+            name="emailid"
+            placeholder="Email ID"
+            required
+            class="form-control"
+            style="border-radius: 20px; border: 1px solid #f1c40f"
+          />
+          </div>
+          <div class="row w-25 mt-3" style="margin-left:15vh;">
+          <input
+            type="submit"
+            value="Send"
+            class="btn btn-primary"
+            style="border-radius: 20px; background-color: #f1c40f; color: black"
+          />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</footer>

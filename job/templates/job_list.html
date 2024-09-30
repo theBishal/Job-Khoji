@@ -1,0 +1,80 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'recruiter_navigation.html' %}
+<style>
+    #example {
+        width: 100%;
+        font-size: 18px;
+        margin: 70px auto 249px auto;
+      }
+    .manage-job-marquee {
+        font-family: 'Monotype Corsiva';
+        font-size: 25px;
+        color: white;
+        background-color: black;
+        font-weight: bold;
+        margin-top: 1%;
+    }
+
+    .table {
+        margin-top: 20px;
+        background-color: #fff; /* White background for better visibility */
+    }
+
+    .table-primary {
+        background-color: #007bff; /* Bright blue header */
+        color: white;
+    }
+
+    .table-light {
+        background-color: #f8f9fa; /* Light gray for the body */
+    }
+
+    .table tbody tr:hover {
+        background-color: #ffeeba; /* Light yellow on hover for visibility */
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+</style>
+
+
+<marquee class="manage-job-marquee">
+    Manage Job Details
+</marquee>
+
+<hr>
+
+<table class="table table-hover container table-bordered" id="example">
+    <thead>
+        <tr class="table-primary">
+            <th>S.No.</th>
+            <th>Job Title</th>
+            <th>Creation Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in job %}
+        <tr class="table-light">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.title }}</td>
+            <td>{{ i.creationdate }}</td>
+            <td>
+                <a href="{% url 'edit_jobdetail' i.id %}" class="btn btn-success">Edit</a>
+                <a href="{% url 'delete_job' i.id %}" class="btn btn-danger" onclick="return confirm('Are You Sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}
+
+{% include 'footer.html' %}

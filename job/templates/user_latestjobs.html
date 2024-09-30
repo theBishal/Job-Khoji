@@ -1,0 +1,86 @@
+{% load static %} {% block body %} {% include 'user_navigation.html' %}
+
+<style>
+  #example {
+    width: 100%;
+    font-size: 18px;
+    margin: 70px auto 22vh auto;
+  }
+  #example th,
+  td {
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light grey for even rows */
+  }
+
+  tr:hover {
+    background-color: #ffe3b3; /* Brighter highlight on row hover */
+  }
+
+  .btn-success {
+    background-color: #28a745; /* Bootstrap success color */
+    border-color: #28a745; /* Match border with button */
+  }
+
+  .btn-success:hover {
+    background-color: #218838; /* Darker shade on hover */
+    border-color: #1e7e34; /* Match border with hover */
+  }
+  .table-primary {
+    background-color: #007bff; /* Bright blue header */
+    color: white;
+  }
+  marquee{
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    font-weight: bold;
+    margin-top: 1%;
+
+   
+  }
+</style>
+<marquee >
+  Listed Jobs
+</marquee>
+
+<table class="table table-hover table-bordered" id="example">
+  <thead>
+    <tr class="table-primary">
+      <th>S.No.</th>
+      <th>Company Name</th>
+      <th>Job Title</th>
+      <th>Location</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in job %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.recruiter.company }}</td>
+      <td>{{ i.title }}</td>
+      <td>{{ i.location }}</td>
+      <td>{{ i.start_date }}</td>
+      <td>{{ i.end_date }}</td>
+
+      {% if i.id in li %}
+      <td>Applied</td>
+      {% else %}
+      <td>
+        <a href="{% url 'job_detail' i.id %}" class="btn btn-success">Apply</a>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% include 'footer.html' %} {% endblock %}

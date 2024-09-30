@@ -1,0 +1,50 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'admin_navigation.html' %}
+
+<marquee style="font-family: 'Monotype Corsiva'; font-size: 25px; color: darkcyan; background-color: black; font-weight: bold; margin-top: 1%;">
+    View Recruiter - Pending
+</marquee>
+
+<hr>
+
+<div class="container mt-5 shadow-lg p-4" style="background-color: #ffffff; border-radius: 10px;">
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group mb-3">
+            <label for="recruiterName" class="font-weight-bold">Recruiter Name</label>
+            <input type="text" class="form-control" id="recruiterName" name="uname" 
+                   value="{{ recruiter.user.first_name }} {{ recruiter.user.last_name }}" readonly>
+        </div>
+        
+        <div class="form-group mb-3">
+            <label for="status" class="font-weight-bold">Status</label>
+            <select class="form-control" id="status" name="status">
+                <option value="Accept">Accept</option>
+                <option value="Reject">Reject</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary my-3" style="width: 200px; height: 40px; font-size: 20px;">
+            Update Status
+        </button>
+    </form>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert("Status changed successfully");
+    window.location.href = ("{% url 'recruiter_all' %}");
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong, try again");
+</script>
+{% endif %}
+
+{% endblock %}
